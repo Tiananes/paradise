@@ -3639,6 +3639,102 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get skillImporting => '导入中…';
+
+  @override
+  String get voiceImageHeader => '语音与画图';
+
+  @override
+  String get voiceImageFooter =>
+      '每个角色单独决定。开启后模型会多一个可调用的工具：想展示什么时会画图，遇到值得听的话时会说话。接口默认跟随全局设置，也可以给这个角色单独指定。';
+
+  @override
+  String get voiceImageDraw => '画图';
+
+  @override
+  String get voiceImageDrawSub => '允许这个角色用 OpenAI 兼容的画图接口生成图片';
+
+  @override
+  String get voiceImageDrawModel => '画图模型';
+
+  @override
+  String get voiceImageDrawSize => '图片尺寸';
+
+  @override
+  String get voiceImageSpeak => '语音';
+
+  @override
+  String get voiceImageSpeakSub => '允许这个角色朗读台词';
+
+  @override
+  String get voiceImageEngine => '引擎';
+
+  @override
+  String get voiceImageEngineSystem => '设备语音';
+
+  @override
+  String get voiceImageEngineSystemSub => '手机自带的语音合成，离线可用、不消耗额度。';
+
+  @override
+  String get voiceImageEngineApi => '语音接口';
+
+  @override
+  String get voiceImageEngineApiSub =>
+      '任意 OpenAI 兼容的 audio/speech 接口，可以使用克隆音色。';
+
+  @override
+  String get voiceImageVoice => '音色';
+
+  @override
+  String get voiceImageVoiceSub => '留空则使用全局默认';
+
+  @override
+  String get voiceImageAutoSpeak => '自动朗读回复';
+
+  @override
+  String get voiceImageAutoSpeakSub => '每条回复完成后自动朗读，无需模型调用工具';
+
+  @override
+  String get voiceImageNotConfigured => '请先在 设置 > AI 回复 里配置默认的画图和语音接口。';
+
+  @override
+  String get aiSettingsVoiceImage => '语音与画图';
+
+  @override
+  String get aiSettingsVoiceImageSub => '需要这些能力的角色使用的默认接口';
+
+  @override
+  String get aiSettingsImageProvider => '画图接口';
+
+  @override
+  String get aiSettingsImageModel => '画图模型';
+
+  @override
+  String get aiSettingsImageSize => '图片尺寸';
+
+  @override
+  String get aiSettingsTtsEngine => '语音引擎';
+
+  @override
+  String get aiSettingsTtsProvider => '语音接口';
+
+  @override
+  String get aiSettingsTtsModel => '语音模型';
+
+  @override
+  String get aiSettingsTtsVoice => '默认音色';
+
+  @override
+  String get aiSettingsTtsSpeed => '语速';
+
+  @override
+  String get aiSettingsTtsSpeedSub =>
+      'Playback rate for synthesized speech, 1.00x is the endpoint default';
+
+  @override
+  String get actionNone => 'None';
+
+  @override
+  String get voiceImageFollowGlobal => '跟随全局';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -7276,4 +7372,93 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get skillImporting => '匯入中…';
+
+  @override
+  String get voiceImageHeader => '語音與畫圖';
+
+  @override
+  String get voiceImageFooter =>
+      '每個角色單獨決定。開啟後模型會多一個可呼叫的工具：想展示什麼時會畫圖，遇到值得聽的話時會說話。介面預設跟隨全域設定，也可以給這個角色單獨指定。';
+
+  @override
+  String get voiceImageDraw => '畫圖';
+
+  @override
+  String get voiceImageDrawSub => '允許這個角色用 OpenAI 相容的畫圖介面生成圖片';
+
+  @override
+  String get voiceImageDrawModel => '畫圖模型';
+
+  @override
+  String get voiceImageDrawSize => '圖片尺寸';
+
+  @override
+  String get voiceImageSpeak => '語音';
+
+  @override
+  String get voiceImageSpeakSub => '允許這個角色朗讀台詞';
+
+  @override
+  String get voiceImageEngine => '引擎';
+
+  @override
+  String get voiceImageEngineSystem => '裝置語音';
+
+  @override
+  String get voiceImageEngineSystemSub => '手機內建的語音合成，離線可用、不消耗額度。';
+
+  @override
+  String get voiceImageEngineApi => '語音介面';
+
+  @override
+  String get voiceImageEngineApiSub =>
+      '任意 OpenAI 相容的 audio/speech 介面，可以使用克隆音色。';
+
+  @override
+  String get voiceImageVoice => '音色';
+
+  @override
+  String get voiceImageVoiceSub => '留空則使用全域預設';
+
+  @override
+  String get voiceImageAutoSpeak => '自動朗讀回覆';
+
+  @override
+  String get voiceImageAutoSpeakSub => '每條回覆完成後自動朗讀，無需模型呼叫工具';
+
+  @override
+  String get voiceImageNotConfigured => '請先在 設定 > AI 回覆 裡設定預設的畫圖和語音介面。';
+
+  @override
+  String get aiSettingsVoiceImage => '語音與畫圖';
+
+  @override
+  String get aiSettingsVoiceImageSub => '需要這些能力的角色使用的預設介面';
+
+  @override
+  String get aiSettingsImageProvider => '畫圖介面';
+
+  @override
+  String get aiSettingsImageModel => '畫圖模型';
+
+  @override
+  String get aiSettingsImageSize => '圖片尺寸';
+
+  @override
+  String get aiSettingsTtsEngine => '語音引擎';
+
+  @override
+  String get aiSettingsTtsProvider => '語音介面';
+
+  @override
+  String get aiSettingsTtsModel => '語音模型';
+
+  @override
+  String get aiSettingsTtsVoice => '預設音色';
+
+  @override
+  String get aiSettingsTtsSpeed => '語速';
+
+  @override
+  String get voiceImageFollowGlobal => '跟隨全域';
 }

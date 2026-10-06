@@ -3793,4 +3793,105 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get skillImporting => 'Importing…';
+
+  @override
+  String get voiceImageHeader => 'Voice and drawing';
+
+  @override
+  String get voiceImageFooter =>
+      'Each role decides for itself. Turning a channel on gives the model a tool it can call: it draws when it wants to show something, and speaks when a line is worth hearing. The endpoint comes from the global default unless this role overrides it.';
+
+  @override
+  String get voiceImageDraw => 'Drawing';
+
+  @override
+  String get voiceImageDrawSub =>
+      'Let this role generate pictures with an OpenAI compatible image endpoint';
+
+  @override
+  String get voiceImageDrawModel => 'Image model';
+
+  @override
+  String get voiceImageDrawSize => 'Image size';
+
+  @override
+  String get voiceImageSpeak => 'Voice';
+
+  @override
+  String get voiceImageSpeakSub => 'Let this role read lines out loud';
+
+  @override
+  String get voiceImageEngine => 'Engine';
+
+  @override
+  String get voiceImageEngineSystem => 'Device voice';
+
+  @override
+  String get voiceImageEngineSystemSub =>
+      'The phone\'s own text to speech. Works offline and costs nothing.';
+
+  @override
+  String get voiceImageEngineApi => 'Speech endpoint';
+
+  @override
+  String get voiceImageEngineApiSub =>
+      'Any OpenAI compatible audio/speech endpoint. Can carry a cloned voice.';
+
+  @override
+  String get voiceImageVoice => 'Voice id';
+
+  @override
+  String get voiceImageVoiceSub => 'Empty uses the global default';
+
+  @override
+  String get voiceImageAutoSpeak => 'Read replies aloud';
+
+  @override
+  String get voiceImageAutoSpeakSub =>
+      'Speak every finished reply without being asked';
+
+  @override
+  String get voiceImageNotConfigured =>
+      'Set a default image and speech endpoint in Settings > AI replies first.';
+
+  @override
+  String get aiSettingsVoiceImage => 'Voice and drawing';
+
+  @override
+  String get aiSettingsVoiceImageSub =>
+      'Default endpoints for the roles that ask for them';
+
+  @override
+  String get aiSettingsImageProvider => 'Image endpoint';
+
+  @override
+  String get aiSettingsImageModel => 'Image model';
+
+  @override
+  String get aiSettingsImageSize => 'Image size';
+
+  @override
+  String get aiSettingsTtsEngine => 'Speech engine';
+
+  @override
+  String get aiSettingsTtsProvider => 'Speech endpoint';
+
+  @override
+  String get aiSettingsTtsModel => 'Speech model';
+
+  @override
+  String get aiSettingsTtsVoice => 'Default voice';
+
+  @override
+  String get aiSettingsTtsSpeed => 'Speed';
+
+  @override
+  String get aiSettingsTtsSpeedSub =>
+      'Playback rate for synthesized speech, 1.00x is the endpoint default';
+
+  @override
+  String get actionNone => 'None';
+
+  @override
+  String get voiceImageFollowGlobal => 'Follow global';
 }

@@ -7,6 +7,7 @@ import '../core/provider_icons.dart';
 import '../core/theme.dart';
 import '../core/ui_kit.dart';
 import '../data/ai/provider_model.dart';
+import '../data/ai/speech.dart';
 import '../data/ai/tokenizer.dart';
 import '../data/ai_config.dart';
 import '../l10n/x.dart';
@@ -491,8 +492,200 @@ class _AdvancedTab extends StatelessWidget {
             TgTextCell(icon: Ic.list, title: l.aiGlobalHeaders, subtitle: s.globalHeaders.any((h) => h.key.trim().isNotEmpty) ? [for (final h in s.globalHeaders) if (h.key.trim().isNotEmpty) h.key.trim()].join(', ') : l.aiHeadersNone, divider: false, onTap: () => _pickGlobalHeaders(context)),
           ],
         ),
+        _genSection(context, s),
       ],
     );
+  }
+
+  /// Default endpoints for the two generative side channels.
+  ///
+  /// These are defaults, not switches: whether a role may draw or speak is
+  /// decided on the role itself. What is decided here is which endpoint it
+  /// reaches for when it does, so a user with one image gateway and one cloned
+  /// voice sets them once instead of per character.
+  Widget _genSection(BuildContext context, AiSettings s) {
+    final l = context.l;
+    final p = context.p;
+    final imageProvider = s.imageProviderId.trim().isEmpty ? null : findProvider(s, s.imageProviderId);
+    final ttsProvider = s.ttsProviderId.trim().isEmpty ? null : findProvider(s, s.ttsProviderId);
+    final engine = s.ttsEngine;
+
+    return TgSection(
+      header: l.aiSettingsVoiceImage,
+      footer: l.aiSettingsVoiceImageSub,
+      children: [
+        TgTextCell(
+          icon: Ic.image,
+          title: l.aiSettingsImageProvider,
+          subtitle: imageProvider?.name ?? (s.imageProviderId.trim().isEmpty ? l.voiceImageNotConfigured : s.imageProviderId),
+          value: l.personaModelChange,
+          onTap: () => _pickGenProvider(context, forImage: true),
+        ),
+        TgTextCell(
+          icon: Ic.ai,
+          title: l.aiSettingsImageModel,
+          subtitle: s.imageModelId.trim().isEmpty ? l.voiceImageNotConfigured : s.imageModelId,
+          value: l.personaModelChange,
+          onTap: () => _pickImageModel(context),
+        ),
+        TgTextCell(
+          icon: Ic.image,
+          title: l.aiSettingsImageSize,
+          subtitle: s.imageSize,
+          value: l.personaModelChange,
+          onTap: () => _pickGenImageSize(context),
+        ),
+        TgTextCell(
+          icon: Ic.unmute,
+          title: l.aiSettingsTtsEngine,
+          subtitle: engine == TtsEngine.system ? l.voiceImageEngineSystemSub : l.voiceImageEngineApiSub,
+          value: engine == TtsEngine.system ? l.voiceImageEngineSystem : l.voiceImageEngineApi,
+          divider: engine == TtsEngine.api,
+          onTap: () => _pickGenEngine(context),
+        ),
+        if (engine == TtsEngine.api) ...[
+          TgTextCell(
+            icon: Ic.ai,
+            title: l.aiSettingsTtsProvider,
+            subtitle: ttsProvider?.name ?? (s.ttsProviderId.trim().isEmpty ? l.voiceImageNotConfigured : s.ttsProviderId),
+            value: l.personaModelChange,
+            onTap: () => _pickGenProvider(context, forImage: false),
+          ),
+          TgTextCell(
+            icon: Ic.list,
+            title: l.aiSettingsTtsModel,
+            subtitle: s.ttsModelId.trim().isEmpty ? l.aiModelDefault : s.ttsModelId,
+            value: l.personaModelChange,
+            onTap: () => _pickTtsModel(context),
+          ),
+          TgTextCell(
+            icon: Ic.unmute,
+            title: l.aiSettingsTtsVoice,
+            subtitle: s.ttsVoice.trim().isEmpty ? 'alloy' : s.ttsVoice,
+            value: l.personaModelChange,
+            onTap: () => _pickGenVoice(context),
+          ),
+          TgTextCell(
+            icon: Ic.music,
+            title: l.aiSettingsTtsSpeed,
+            subtitle: l.aiSettingsTtsSpeedSub,
+            value: '${s.ttsSpeed.toStringAsFixed(2)}x',
+            divider: false,
+            onTap: () => _pickGenSpeed(context),
+          ),
+        ] else
+          TgTextCell(
+            icon: Ic.unmute,
+            title: l.aiSettingsTtsVoice,
+            subtitle: l.voiceImageEngineSystemSub,
+            divider: false,
+            color: p.subtitle,
+          ),
+      ],
+    );
+  }
+
+  Future<void> _pickGenProvider(BuildContext context, {required bool forImage}) async {
+    final cfg = AiScope.read(context);
+    final l = context.l;
+    final picked = await showAiModelPicker(
+      context,
+      cfg: cfg,
+      title: forImage ? l.aiSettingsImageProvider : l.aiSettingsTtsProvider,
+      allowFollowChain: false,
+      followTitle: l.actionNone,
+      followSubtitle: l.aiModelDefault,
+    );
+    if (picked == null) return;
+    cfg.update((s) => forImage
+        ? s.copyWith(imageProviderId: picked.providerId, imageModelId: picked.modelId)
+        : s.copyWith(ttsProviderId: picked.providerId, ttsModelId: picked.modelId));
+  }
+
+  Future<void> _pickImageModel(BuildContext context) async {
+    final cfg = AiScope.read(context);
+    final l = context.l;
+    final v = await showTgInput(
+      context,
+      title: l.aiSettingsImageModel,
+      initial: cfg.settings.imageModelId,
+      hint: 'gpt-image-1',
+    );
+    if (v == null) return;
+    cfg.update((s) => s.copyWith(imageModelId: v.trim()));
+  }
+
+  Future<void> _pickTtsModel(BuildContext context) async {
+    final cfg = AiScope.read(context);
+    final l = context.l;
+    final v = await showAiSelect<String>(
+      context,
+      title: l.aiSettingsTtsModel,
+      value: cfg.settings.ttsModelId.trim().isEmpty ? kSpeechModels.first : cfg.settings.ttsModelId.trim(),
+      options: [for (final m in kSpeechModels) (value: m, label: m, sub: null)],
+    );
+    if (v == null) return;
+    cfg.update((s) => s.copyWith(ttsModelId: v));
+  }
+
+  Future<void> _pickGenImageSize(BuildContext context) async {
+    final cfg = AiScope.read(context);
+    final l = context.l;
+    const sizes = ['1024x1024', '1536x1024', '1024x1536', '1792x1024', '1024x1792', '512x512'];
+    final v = await showAiSelect<String>(
+      context,
+      title: l.aiSettingsImageSize,
+      value: cfg.settings.imageSize,
+      options: [for (final s in sizes) (value: s, label: s, sub: null)],
+    );
+    if (v == null) return;
+    cfg.update((s) => s.copyWith(imageSize: v));
+  }
+
+  Future<void> _pickGenEngine(BuildContext context) async {
+    final cfg = AiScope.read(context);
+    final l = context.l;
+    final v = await showAiSelect<String>(
+      context,
+      title: l.aiSettingsTtsEngine,
+      value: ttsEngineWire(cfg.settings.ttsEngine),
+      options: [
+        (value: 'system', label: l.voiceImageEngineSystem, sub: l.voiceImageEngineSystemSub),
+        (value: 'api', label: l.voiceImageEngineApi, sub: l.voiceImageEngineApiSub),
+      ],
+    );
+    if (v == null) return;
+    cfg.update((s) => s.copyWith(ttsEngine: ttsEngineOf(v)));
+  }
+
+  Future<void> _pickGenVoice(BuildContext context) async {
+    final cfg = AiScope.read(context);
+    final l = context.l;
+    final v = await showAiSelect<String>(
+      context,
+      title: l.aiSettingsTtsVoice,
+      value: cfg.settings.ttsVoice.trim().isEmpty ? kOpenAiVoices.first : cfg.settings.ttsVoice.trim(),
+      options: [
+        for (final name in kOpenAiVoices) (value: name, label: name, sub: null),
+      ],
+    );
+    if (v == null) return;
+    cfg.update((s) => s.copyWith(ttsVoice: v));
+  }
+
+  Future<void> _pickGenSpeed(BuildContext context) async {
+    final cfg = AiScope.read(context);
+    final l = context.l;
+    final v = await showAiSelect<double>(
+      context,
+      title: l.aiSettingsTtsSpeed,
+      value: cfg.settings.ttsSpeed,
+      options: [
+        for (final s in const [0.75, 1.0, 1.25, 1.5, 2.0]) (value: s, label: '${s}x', sub: null),
+      ],
+    );
+    if (v == null) return;
+    cfg.update((s) => s.copyWith(ttsSpeed: v));
   }
 
   Future<void> _pickUserAgent(BuildContext context) async {
