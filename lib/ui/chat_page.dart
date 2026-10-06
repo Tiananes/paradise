@@ -285,7 +285,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
 
   void _sendLibSticker(UserSticker s) {
     _store.human!.stickers.markUsed(s.id);
-    _store.send(chat, '', kind: MsgKind.sticker, data: {'emoji': s.kind == StickerKind.emoji ? s.value : '', 'sid': s.id, 'path': s.kind == StickerKind.emoji ? '' : s.value, 'gif': s.kind == StickerKind.gif}, reply: _reply?.id);
+    _store.send(chat, '', kind: MsgKind.sticker, data: {'emoji': s.kind == StickerKind.emoji ? s.value : '', 'sid': s.id, 'path': s.kind == StickerKind.emoji ? '' : s.value, 'gif': s.kind == StickerKind.gif, 'thumb': s.thumb}, reply: _reply?.id);
     setState(() {
       _reply = null;
       _phase++;
@@ -492,6 +492,8 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                 controller: _scroll,
                 reverse: true,
                 physics: const ClampingScrollPhysics(),
+                // render further ahead so a fast fling does not paint blank
+                cacheExtent: 900,
                 findChildIndexCallback: (k) {
                   final id = k is ValueKey<String> ? k.value : null;
                   final j = ms.indexWhere((m) => m.id == id);
@@ -723,7 +725,14 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
         child: col,
       );
     }
-    return KeyedSubtree(key: _keyFor(m.id), child: col);
+    // A repaint boundary per row, which kelivo puts around every timeline item.
+    // The transcript is one big scrollable; without a boundary a repaint of the
+    // streaming bubble (or the flash highlight, or a card finishing its size
+    // animation) walks the paint for the whole viewport. With one, the changed
+    // row re-records its own layer and its neighbours reuse theirs. The keyed
+    // subtree above keeps the element identity that the reveal and the flash
+    // both rely on.
+    return KeyedSubtree(key: _keyFor(m.id), child: RepaintBoundary(child: col));
   }
 
   // search header close pill and the field pill

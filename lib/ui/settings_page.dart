@@ -14,6 +14,8 @@ import '../core/theme.dart';
 import '../core/ui_kit.dart';
 import '../app_info.dart' show appVersion;
 import '../data/models.dart';
+import '../data/speech_config.dart';
+import '../data/ai/provider_model.dart';
 import '../data/store.dart';
 import '../l10n/x.dart';
 import 'bubble.dart';
@@ -21,12 +23,15 @@ import 'account_page.dart';
 import 'update_sheet.dart';
 import 'wallpaper.dart';
 import 'wallpaper_page.dart';
+import 'whats_new.dart';
 import 'workspace/workspace_pages.dart';
 import 'skills_page.dart';
 import 'ai_model_picker.dart';
 import 'ai_reply_page.dart';
 import 'ai_settings_page.dart';
+import 'speech_page.dart';
 import 'human_pages.dart';
+import 'shop_page.dart';
 
 // IconBackgroundColors pairs top and bottom
 const _blue = [Color(0xFF1CA5ED), Color(0xFF1488E1)];
@@ -78,6 +83,7 @@ class SettingsTab extends StatelessWidget {
                 ),
                 _Cell(icon: Ic.smile, colors: _cyan, title: l.humanTitle, sub: l.humanSubtitle, onTap: () => openHumanSettings(context)),
                 _Cell(icon: Ic.chats, colors: _teal, title: l.aiReplyTitle, sub: aiReplySummary(st), onTap: () => openAiReplySettings(context)),
+                _Cell(icon: Ic.unmute, colors: _cyan, title: l.speechTitle, sub: speechSummary(context, l), onTap: () => openSpeechSettings(context)),
                 _Cell(icon: Ic.folder, colors: _gray, title: l.wsTitle, sub: st.workspace.all.isEmpty ? l.wsSub : wsSettingsSummary(st), onTap: () => openWorkspaceSettings(context)),
                 ListenableBuilder(
                   listenable: st.skills,
@@ -91,6 +97,13 @@ class SettingsTab extends StatelessWidget {
               const SizedBox(height: 12),
               _Group(children: [
                 _Cell(
+                  icon: Ic.crown,
+                  colors: _orange,
+                  title: l.shopEntry,
+                  sub: l.shopEntrySub,
+                  onTap: () => Navigator.of(context).push(TgRoute(builder: (_) => const ShopPage())),
+                ),
+                _Cell(
                   icon: Ic.download,
                   colors: _green,
                   title: l.updateCheckTitle,
@@ -102,7 +115,6 @@ class SettingsTab extends StatelessWidget {
                   colors: _gray,
                   title: l.settingsAbout,
                   sub: l.settingsAboutSub,
-                  last: true,
                   onTap: () => showTgDialog<void>(
                     context,
                     title: l.settingsAboutSub,
@@ -116,6 +128,14 @@ class SettingsTab extends StatelessWidget {
                     ]),
                     actions: [DialogAction(l.actionOk, null)],
                   ),
+                ),
+                _Cell(
+                  icon: Ic.up,
+                  colors: _green,
+                  title: l.whatsNewEntry,
+                  sub: l.whatsNewTitle(appVersion),
+                  last: true,
+                  onTap: () => showWhatsNewDialog(context),
                 ),
               ]),
               Padding(padding: const EdgeInsets.fromLTRB(20, 16, 20, 0), child: Center(child: Text(l.settingsFooter, style: TextStyle(color: p.subtitle, fontSize: 13, decoration: TextDecoration.none, fontWeight: FontWeight.w400)))),
@@ -251,7 +271,7 @@ class SettingsTab extends StatelessWidget {
     final st = context.store;
     final l = context.l;
     final msgs = st.chats.fold<int>(0, (a, c) => a + c.msgs.length);
-    final media = st.chats.fold<int>(0, (a, c) => a + c.msgs.where((m) => m.kind == MsgKind.photo || m.kind == MsgKind.file || m.kind == MsgKind.music).length);
+    final media = st.chats.fold<int>(0, (a, c) => a + c.msgs.where((m) => m.kind == MsgKind.photo || m.kind == MsgKind.video || m.kind == MsgKind.file || m.kind == MsgKind.music).length);
     Future<void> ask(String title, String msg, String action, VoidCallback run) async {
       final r = await showTgDialog<bool>(context, title: title, message: msg, actions: [DialogAction(l.actionCancel, false), DialogAction(action, true, danger: true)]);
       if (r == true) run();
@@ -275,7 +295,83 @@ class SettingsTab extends StatelessWidget {
         _Cell(icon: Ic.share, colors: _blue, title: l.humanExport, sub: l.dataBackupExportSub, onTap: () => _exportBackup(context)),
         _Cell(icon: Ic.file, colors: _green, title: l.humanImportFile, sub: l.dataBackupImportSub, last: true, onTap: () => _importBackup(context)),
       ]),
+      _Head(l.autoBackupTitle),
+      _Group(children: [
+        _Cell(
+          icon: Ic.download,
+          colors: _green,
+          title: _autoBackupModeLabel(st, l),
+          sub: _autoBackupLastLabel(st, l),
+          last: true,
+          onTap: () => _autoBackupPick(context),
+        ),
+      ]),
     ];
+  }
+
+  static String _clockMin(int m) => '${(m ~/ 60).toString().padLeft(2, '0')}:${(m % 60).toString().padLeft(2, '0')}';
+
+  static String _autoBackupModeLabel(Store st, AppLocalizations l) {
+    final ab = st.autoBackup;
+    return switch (ab.mode) {
+      'interval' => l.autoBackupModeInterval(ab.intervalMin),
+      'window' => l.autoBackupModeWindow(_clockMin(ab.windowStart), _clockMin(ab.windowEnd)),
+      'off' => l.autoBackupOff,
+      _ => l.autoBackupModeChange,
+    };
+  }
+
+  static String _autoBackupLastLabel(Store st, AppLocalizations l) {
+    final at = st.autoBackup.lastAt;
+    if (at == 0) return l.autoBackupNever;
+    final d = DateTime.fromMillisecondsSinceEpoch(at);
+    String p(int v) => v.toString().padLeft(2, '0');
+    return l.autoBackupLast('${d.year}-${p(d.month)}-${p(d.day)} ${p(d.hour)}:${p(d.minute)}');
+  }
+
+  /// One dialog with every schedule preset; turning the feature off goes
+  /// through its own warning first, per the "closing loses data" rule.
+  Future<void> _autoBackupPick(BuildContext context) async {
+    final st = context.store;
+    final l = context.l;
+    final r = await showTgDialog<String>(
+      context,
+      title: l.autoBackupTitle,
+      message: l.autoBackupSub,
+      actions: [
+        DialogAction(l.autoBackupModeChange, 'change'),
+        DialogAction(l.autoBackupModeInterval(1), 'interval:60'),
+        DialogAction(l.autoBackupModeInterval(6), 'interval:360'),
+        DialogAction(l.autoBackupModeInterval(12), 'interval:720'),
+        DialogAction(l.autoBackupModeInterval(24), 'interval:1440'),
+        DialogAction(l.autoBackupModeWindow('03:00', '05:00'), 'window:180:300'),
+        DialogAction(l.autoBackupOff, 'off', danger: true),
+        DialogAction(l.actionCancel, ''),
+      ],
+    );
+    if (r == null || r.isEmpty || !context.mounted) return;
+    if (r == 'off') {
+      final ok = await showTgDialog<bool>(
+        context,
+        title: l.autoBackupOffTitle,
+        message: l.autoBackupOffMessage,
+        actions: [
+          DialogAction(l.actionCancel, false),
+          DialogAction(l.autoBackupOffAction, true, danger: true),
+        ],
+      );
+      if (ok != true || !context.mounted) return;
+      await st.setAutoBackup(mode: 'off');
+      return;
+    }
+    final parts = r.split(':');
+    if (parts[0] == 'interval') {
+      await st.setAutoBackup(mode: 'interval', intervalMin: int.parse(parts[1]));
+    } else if (parts[0] == 'window') {
+      await st.setAutoBackup(mode: 'window', windowStart: int.parse(parts[1]), windowEnd: int.parse(parts[2]));
+    } else {
+      await st.setAutoBackup(mode: parts[0]);
+    }
   }
 
   /// Hands the whole account to the system save dialog.
@@ -372,6 +468,15 @@ class SettingsTab extends StatelessWidget {
 
 /// Every entry names itself in its own language, so the list is readable
 /// whichever one the reader already knows.
+/// One line for the voice row: which engine is live, and whether the
+/// endpoint it needs has been filled in.
+String speechSummary(BuildContext context, AppLocalizations l) {
+  final cfg = SpeechScope.of(context);
+  if (cfg.engine == TtsEngine.system) return l.speechSummarySystem;
+  if (!cfg.apiReady) return l.speechNotReady;
+  return '${l.speechEngineApi} · ${cfg.model} · ${cfg.voice}';
+}
+
 String languageLabel(String? tag, AppLocalizations l) => switch (tag) {
       'en' => l.languageEnglish,
       'zh' => l.languageChineseSimplified,
