@@ -614,38 +614,147 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutLinkFailed => 'Could not open the link';
 
   @override
-  String get settingsAboutSub => 'Version 1.0.2';
+  String settingsAboutSub(String version) {
+    return 'Version $version';
+  }
 
   @override
-  String get settingsAboutLicense =>
-      'Developer: 殘月. It is distributed under the AGPL 3.0 open source licence, which means you may not redistribute or commercialise it without publishing its source code. Violations will be handled in accordance with the law.';
+  String get aboutSourceCode => 'Source code';
 
   @override
-  String get settingsAboutCommunity => 'Join the community:';
+  String get aboutCommunity => 'Community';
 
   @override
-  String get settingsAboutRepo =>
-      'Project address:\nhttps://github.com/Celvra/paradise';
+  String get aboutQqGroup => 'QQ group';
 
   @override
-  String get settingsAboutThanks =>
-      'Acknowledgements:\n\nKelivo - ToolCall reference\nhttps://github.com/Chevey339/kelivo\n\nSillyTavern - persona card reference\nhttps://github.com/SillyTavern/SillyTavern';
+  String get aboutAcknowledgements => 'Acknowledgements';
 
   @override
-  String get settingsAboutDeps =>
-      'Dependencies:\n\narchive 4.3.0 - zipping a workspace for export  (MIT)\nhttps://github.com/brendan-duncan/archive\nasync 2.13.0 - not used directly, pulled in by flutter_local_notifications  (BSD-2-Clause)\nhttps://github.com/dart-lang/async\ncharacters 1.4.1 - grapheme clusters for text measurement  (BSD-3-Clause)\nhttps://github.com/dart-lang/core/tree/main/pkgs/characters\ncrypto 3.0.7 - declared for the workspace, nothing on device is hashed yet  (BSD-3-Clause)\nhttps://github.com/dart-lang/core/tree/main/pkgs/crypto\nfile_picker 13.1.0 - picking documents and audio files  (MIT)\nhttps://github.com/vicajilau/flutter_file_picker/tree/main/packages/file_picker\nflutter_contacts 2.5.0 - sharing a contact card  (MIT)\nhttps://github.com/QuisApp/flutter_contacts\nflutter_highlight 0.7.0 - colouring the code preview  (MIT)\nhttps://github.com/git-touch/highlight\nflutter_local_notifications 18.0.1 - local notifications  (BSD-3-Clause)\nhttps://github.com/MaikuB/flutter_local_notifications\nflutter_math_fork 0.7.4 - inline TeX math in a bubble  (Apache-2.0)\nhttps://github.com/simplezhli/flutter_math_fork\nflutter_svg 2.3.0 - provider logos and vector icons  (MIT)\nhttps://github.com/flutter/packages/tree/main/third_party/packages/flutter_svg\ngeolocator 13.0.4 - location attachments  (MIT)\nhttps://github.com/baseflow/flutter-geolocator/tree/main/geolocator\nglob 2.2.0 - the workspace find tool  (BSD-3-Clause)\nhttps://github.com/dart-lang/tools/tree/main/pkgs/glob\nhighlight 0.7.0 - the grammar data behind the code preview  (MIT)\nhttps://github.com/pd4d10/highlight\nhttp 1.6.0 - OpenAI compatible endpoints  (BSD-3-Clause)\nhttps://github.com/dart-lang/http/tree/master/pkgs/http\nimage_picker 1.2.3 - camera and gallery photos  (Apache-2.0)\nhttps://github.com/flutter/packages/tree/main/packages/image_picker/image_picker\nintl 0.20.3 - date and number formatting  (BSD-3-Clause)\nhttps://github.com/dart-lang/i18n/tree/main/pkgs/intl\npath 1.9.1 - path arithmetic in the workspace sandbox  (BSD-3-Clause)\nhttps://github.com/dart-lang/core/tree/main/pkgs/path\npath_provider 2.1.6 - app directory for stickers and exports  (BSD-3-Clause)\nhttps://github.com/flutter/packages/tree/main/packages/path_provider/path_provider\npermission_handler 13.0.2 - one place to ask for photos, contacts, location and notifications  (MIT)\nhttps://github.com/baseflow/flutter-permission-handler\nphoto_manager 3.12.0 - album access for attachments  (Apache-2.0)\nhttps://github.com/fluttercandies/flutter_photo_manager\nratex_flutter 0.1.14 - the native LaTeX math card  (MIT)\nhttps://github.com/erweixin/RaTeX\nshared_preferences 2.5.5 - settings and chat storage  (BSD-3-Clause)\nhttps://github.com/flutter/packages/tree/main/packages/shared_preferences/shared_preferences\nsqflite 2.4.4 - message history and per chat paging  (BSD-2-Clause)\nhttps://github.com/tekartik/sqflite/tree/master/sqflite\ntimezone 0.10.1 - timezone data for scheduled messages  (BSD-2-Clause)\nhttps://github.com/srawlins/timezone\ntypst_flutter 3.0.0 - the embedded Typst compiler behind the CeTZ drawing card  (Apache-2.0)\nhttps://github.com/ajmalbuv/typst_flutter\nurl_launcher 6.3.2 - the community link in this dialog  (BSD-3-Clause)\nhttps://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher\nwebview_flutter 4.14.1 - rendering html in a file preview  (BSD-3-Clause)\nhttps://github.com/flutter/packages/tree/main/packages/webview_flutter/webview_flutter\nvideo_player 2.14.1 - video playback in chat bubbles  (BSD-3-Clause)\nhttps://github.com/flutter/packages/tree/main/packages/video_player/video_player\nworkmanager 0.10.10 - background delivery when the app is killed  (MIT)\nhttps://github.com/fluttercommunity/flutter_workmanager';
+  String get aboutThanksKelivo => 'ToolCall reference';
 
   @override
-  String get settingsAboutCommunityUrl => 'https://discord.gg/aQaNUHPsw';
+  String get aboutThanksSillyTavern => 'Persona card reference';
 
   @override
-  String get settingsAboutQqGroup => 'QQ group 272298906:';
+  String get aboutLicenses => 'Open source licenses';
 
   @override
-  String get settingsAboutQqGroupUrl => 'https://qm.qq.com/q/BeQPYWuzVS';
+  String get aboutLicensesSub =>
+      'These are the packages this app ships, each under its own licence. The full text sits in its repository.';
 
   @override
-  String get settingsFooter => 'Developed by Celvra';
+  String get aboutDepArchive => 'Zipping a workspace for export';
+
+  @override
+  String get aboutDepCharacters => 'Grapheme clusters for text measurement';
+
+  @override
+  String get aboutDepCrypto =>
+      'Hashing in the workspace; nothing is hashed on device yet';
+
+  @override
+  String get aboutDepFilePicker => 'Picking documents and audio files';
+
+  @override
+  String get aboutDepFlutterContacts => 'Sharing a contact card';
+
+  @override
+  String get aboutDepFlutterHighlight => 'Colouring the code preview';
+
+  @override
+  String get aboutDepFlutterLocalNotifications => 'Local notifications';
+
+  @override
+  String get aboutDepFlutterMathFork => 'Rendering LaTeX inside a bubble';
+
+  @override
+  String get aboutDepFlutterSvg => 'Provider logos and vector icons';
+
+  @override
+  String get aboutDepGeolocator => 'Location attachments';
+
+  @override
+  String get aboutDepGlob => 'The workspace find tool';
+
+  @override
+  String get aboutDepHighlight => 'The grammar data behind the code preview';
+
+  @override
+  String get aboutDepHttp => 'OpenAI compatible endpoints';
+
+  @override
+  String get aboutDepImagePicker => 'Camera and gallery photos';
+
+  @override
+  String get aboutDepIntl => 'Date and number formatting';
+
+  @override
+  String get aboutDepPath => 'Path arithmetic in the workspace sandbox';
+
+  @override
+  String get aboutDepPathProvider => 'App directory for stickers and exports';
+
+  @override
+  String get aboutDepPermissionHandler =>
+      'Asking for photos, contacts, location and notifications in one place';
+
+  @override
+  String get aboutDepPhotoManager => 'Album access for attachments';
+
+  @override
+  String get aboutDepRatex => 'The native LaTeX math card';
+
+  @override
+  String get aboutDepSharedPreferences => 'Settings and chat storage';
+
+  @override
+  String get aboutDepSqflite => 'Message history and per chat paging';
+
+  @override
+  String get aboutDepTerminalView =>
+      'The VT100 parser and renderer behind the workspace terminal, a vendored fork';
+
+  @override
+  String get aboutDepTimezone => 'Timezone data for scheduled messages';
+
+  @override
+  String get aboutDepTypstFlutter =>
+      'The embedded Typst compiler behind the CeTZ drawing card';
+
+  @override
+  String get aboutDepUrlLauncher => 'Opening the links on this page';
+
+  @override
+  String get aboutDepVideoPlayer => 'Video playback in chat bubbles';
+
+  @override
+  String get aboutDepWebview => 'Rendering html in a file preview';
+
+  @override
+  String get aboutDepWorkmanager =>
+      'Background delivery when the app is killed';
+
+  @override
+  String get aboutContributors => 'Contributors';
+
+  @override
+  String aboutContributions(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n contributions',
+      one: '1 contribution',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get aboutContributorsFailed =>
+      'Couldn\'t load the list. Tap to retry.';
+
+  @override
+  String get settingsContributorsThanks => 'Thanks to all contributors';
 
   @override
   String get previewSampleIncoming => 'Good morning! How can I help today?';
@@ -819,7 +928,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dataBackupImportSub => 'From a file you exported before';
 
   @override
-  String dataBackupRestored(num chats, Object messages) {
+  String dataBackupRestored(int chats, int messages) {
     String _temp0 = intl.Intl.pluralLogic(
       chats,
       locale: localeName,
@@ -981,6 +1090,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aiFollowChainSub => 'Use the current main model for summaries';
+
+  @override
+  String get aiModelTabChat => 'Chat';
+
+  @override
+  String get aiModelTabImage => 'Image';
+
+  @override
+  String get aiModelTabAll => 'All';
 
   @override
   String get aiSearchModels => 'Search models';
@@ -2658,7 +2776,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatsNewBody =>
-      'What\'s new in this build:\n\n• Video messages: send videos from the gallery or as files, and the AI can actually watch them\n• Inline files: small files are injected into the context so the AI truly reads them\n• Stickers: the AI reads a sticker\'s meaning before sending it, with thumbnails\n• Clinginess: choose how often the AI speaks first, with an optional cap on proactive messages\n• Shop rework: gifts now land in the chat as a card the AI actually receives, and the shop sits one tap away\n• Auto backup: on by default, overwrite backups survive updates and reinstalls, restore offered on first launch\n• Model catalog: video capability flags corrected where the models.dev feed lags the provider (deepseek v4.1 flash)\n• Editor guard: every way out of the persona editor now asks before discarding edits\n• Upstream v1.0.2 merged: onboarding, SKILLS, LaTeX canvas cards, update checks\n• UI and performance polish';
+      'What\'s new in this build:\n\n• Voice and drawing: switched on per role. Speech runs on the device voice or an OpenAI compatible /audio/speech, drawing on /v1/images/generations\n• A real about page: the dialog became a screen, with the open source licences and the contributors\n• Models by purpose: the picker separates chat models from image models, so a chat no longer offers the image endpoints\n• Video messages: send videos from the gallery or as files, and the AI can actually watch them\n• Inline files: small files are injected into the context so the AI truly reads them\n• Stickers: the AI reads a sticker\'s meaning before sending it, with thumbnails\n• Clinginess: choose how often the AI speaks first, with an optional cap on proactive messages\n• Shop rework: gifts now land in the chat as a card the AI actually receives\n• Auto backup: on by default, overwrite backups survive updates and reinstalls, restore offered on first launch\n• Model catalog: video capability flags corrected where the models.dev feed lags the provider (deepseek v4.1 flash)\n• Editor guard: every way out of the persona editor now asks before discarding edits\n• Fixed on Android: the chat list came up empty because the database failed to open. The messages were there all along\n• Fixed: a deleted message came back after a restart\n• Fixed: the what\'s new sheet was black text in night mode\n• UI and performance polish';
 
   @override
   String get attachCamera => 'Camera';
@@ -3990,4 +4108,211 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatsNewEntry => 'What\'s new';
+
+  @override
+  String get voiceImageHeader => 'Voice and drawing';
+
+  @override
+  String get voiceImageFooter =>
+      'Each role decides for itself. Turning a channel on gives the model a tool it can call: it draws when it wants to show something, and speaks when a line is worth hearing. The endpoint comes from the global default unless this role overrides it.';
+
+  @override
+  String get voiceImageDraw => 'Drawing';
+
+  @override
+  String get voiceImageDrawSub =>
+      'Let this role generate pictures with an OpenAI compatible image endpoint';
+
+  @override
+  String get voiceImageDrawModel => 'Image model';
+
+  @override
+  String get voiceImageDrawSize => 'Image size';
+
+  @override
+  String get voiceImageSpeak => 'Voice';
+
+  @override
+  String get voiceImageSpeakSub => 'Let this role read lines out loud';
+
+  @override
+  String get voiceImageEngine => 'Engine';
+
+  @override
+  String get voiceImageEngineSystem => 'Device voice';
+
+  @override
+  String get voiceImageEngineSystemSub =>
+      'The phone\'s own text to speech. Works offline and costs nothing.';
+
+  @override
+  String get voiceImageEngineApi => 'Speech endpoint';
+
+  @override
+  String get voiceImageEngineApiSub =>
+      'Any OpenAI compatible audio/speech endpoint. Can carry a cloned voice.';
+
+  @override
+  String get voiceImageVoice => 'Voice id';
+
+  @override
+  String get voiceImageVoiceSub => 'Empty uses the global default';
+
+  @override
+  String get voiceImageAutoSpeak => 'Read replies aloud';
+
+  @override
+  String get voiceImageAutoSpeakSub =>
+      'Speak every finished reply without being asked';
+
+  @override
+  String get voiceImageNotConfigured =>
+      'Set a default image and speech endpoint in Settings > AI replies first.';
+
+  @override
+  String get aiSettingsVoiceImage => 'Voice and drawing';
+
+  @override
+  String get aiSettingsVoiceImageSub =>
+      'Default endpoints for the roles that ask for them';
+
+  @override
+  String get aiSettingsImageProvider => 'Image endpoint';
+
+  @override
+  String get aiSettingsImageModel => 'Image model';
+
+  @override
+  String get aiSettingsImageSize => 'Image size';
+
+  @override
+  String get aiSettingsTtsEngine => 'Speech engine';
+
+  @override
+  String get aiSettingsTtsProvider => 'Speech endpoint';
+
+  @override
+  String get aiSettingsTtsModel => 'Speech model';
+
+  @override
+  String get aiSettingsTtsVoice => 'Default voice';
+
+  @override
+  String get aiSettingsTtsSpeed => 'Speed';
+
+  @override
+  String get aiSettingsTtsSpeedSub =>
+      'Playback rate for synthesized speech, 1.00x is the endpoint default';
+
+  @override
+  String get actionNone => 'None';
+
+  @override
+  String get voiceImageFollowGlobal => 'Follow global';
+
+  @override
+  String get speechTitle => 'Voice';
+
+  @override
+  String get speechSummarySystem => 'Device voice';
+
+  @override
+  String get speechEngineHeader => 'Engine';
+
+  @override
+  String get speechEngineFooter =>
+      'The device voice works offline and costs nothing; an endpoint can carry a cloned voice at the price of a request per line.';
+
+  @override
+  String get speechEngineSystem => 'Device voice';
+
+  @override
+  String get speechEngineApi => 'Speech endpoint';
+
+  @override
+  String get speechEndpointHeader => 'Endpoint';
+
+  @override
+  String get speechEndpointFooter =>
+      'This is the one server the voice module talks to. It is separate from the AI providers on purpose: a speech endpoint is not a chat model.';
+
+  @override
+  String get speechBaseUrl => 'Base url';
+
+  @override
+  String get speechBaseUrlHint => 'https://api.openai.com/v1';
+
+  @override
+  String get speechApiKey => 'API key';
+
+  @override
+  String get speechApiKeyHint => 'Paste the key';
+
+  @override
+  String get speechAuthStyle => 'Auth';
+
+  @override
+  String get speechAuthBearer => 'Bearer';
+
+  @override
+  String get speechAuthXApiKey => 'x-api-key';
+
+  @override
+  String get speechAuthQuery => 'Query key';
+
+  @override
+  String get speechModel => 'Model';
+
+  @override
+  String get speechVoiceHeader => 'Voice';
+
+  @override
+  String get speechVoiceFooter =>
+      'The voice id is free text: a gateway with cloned voices accepts ids no fixed list could carry.';
+
+  @override
+  String get speechVoice => 'Voice id';
+
+  @override
+  String get speechVoicePickSub =>
+      'Type a voice id the endpoint accepts. The configured voice is shown as the hint.';
+
+  @override
+  String get speechSpeed => 'Speed';
+
+  @override
+  String get speechInstructions => 'Instructions';
+
+  @override
+  String get speechInstructionsHint =>
+      'Optional: how the voice should read. Only gpt-4o-mini-tts reads this.';
+
+  @override
+  String get speechNotReady => 'Fill in the base url to use the endpoint';
+
+  @override
+  String get speechClear => 'Clear endpoint';
+
+  @override
+  String get speechClearMessage =>
+      'Remove the endpoint and the key? The device voice stays selected.';
+
+  @override
+  String get speechDeviceHeader => 'Device voice';
+
+  @override
+  String get speechDeviceFooter =>
+      'The phone\'s own text to speech is already configured: nothing to fill in.';
+
+  @override
+  String get speechTest => 'Test voice';
+
+  @override
+  String get speechTestSub => 'Speak a line through the selected engine';
+
+  @override
+  String get speechTestLine => 'Hello, this is a test of the voice.';
+
+  @override
+  String get speechTestFailed => 'Could not speak: ';
 }

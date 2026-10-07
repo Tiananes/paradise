@@ -1191,71 +1191,263 @@ abstract class AppLocalizations {
   /// **'About'**
   String get settingsAbout;
 
-  /// Bulletin when the community link cannot be opened
+  /// Bulletin when a link on the about page cannot be opened
   ///
   /// In en, this message translates to:
   /// **'Could not open the link'**
   String get aboutLinkFailed;
 
-  /// Settings row subtitle of the about entry
+  /// Settings row subtitle of the about entry, and the version line on the about page
   ///
   /// In en, this message translates to:
-  /// **'Version 1.0.2'**
-  String get settingsAboutSub;
+  /// **'Version {version}'**
+  String settingsAboutSub(String version);
 
-  /// Licence and ownership notice in the about dialog
+  /// About page row that opens the repository
   ///
   /// In en, this message translates to:
-  /// **'Developer: 殘月. It is distributed under the AGPL 3.0 open source licence, which means you may not redistribute or commercialise it without publishing its source code. Violations will be handled in accordance with the law.'**
-  String get settingsAboutLicense;
+  /// **'Source code'**
+  String get aboutSourceCode;
 
-  /// Label in front of the community link in the about dialog
+  /// About page row that opens the community chat invite
   ///
   /// In en, this message translates to:
-  /// **'Join the community:'**
-  String get settingsAboutCommunity;
+  /// **'Community'**
+  String get aboutCommunity;
 
-  /// Repository link in the about dialog
+  /// About page row that opens the QQ group invite
   ///
   /// In en, this message translates to:
-  /// **'Project address:\nhttps://github.com/Celvra/paradise'**
-  String get settingsAboutRepo;
+  /// **'QQ group'**
+  String get aboutQqGroup;
 
-  /// Acknowledgements to the projects this one was modelled on
+  /// Header of the block naming the projects this one was modelled on
   ///
   /// In en, this message translates to:
-  /// **'Acknowledgements:\n\nKelivo - ToolCall reference\nhttps://github.com/Chevey339/kelivo\n\nSillyTavern - persona card reference\nhttps://github.com/SillyTavern/SillyTavern'**
-  String get settingsAboutThanks;
+  /// **'Acknowledgements'**
+  String get aboutAcknowledgements;
 
-  /// Direct dependencies with their licence, the transitive tree is in the lockfile
+  /// What the Kelivo project was used for
   ///
   /// In en, this message translates to:
-  /// **'Dependencies:\n\narchive 4.3.0 - zipping a workspace for export  (MIT)\nhttps://github.com/brendan-duncan/archive\nasync 2.13.0 - not used directly, pulled in by flutter_local_notifications  (BSD-2-Clause)\nhttps://github.com/dart-lang/async\ncharacters 1.4.1 - grapheme clusters for text measurement  (BSD-3-Clause)\nhttps://github.com/dart-lang/core/tree/main/pkgs/characters\ncrypto 3.0.7 - declared for the workspace, nothing on device is hashed yet  (BSD-3-Clause)\nhttps://github.com/dart-lang/core/tree/main/pkgs/crypto\nfile_picker 13.1.0 - picking documents and audio files  (MIT)\nhttps://github.com/vicajilau/flutter_file_picker/tree/main/packages/file_picker\nflutter_contacts 2.5.0 - sharing a contact card  (MIT)\nhttps://github.com/QuisApp/flutter_contacts\nflutter_highlight 0.7.0 - colouring the code preview  (MIT)\nhttps://github.com/git-touch/highlight\nflutter_local_notifications 18.0.1 - local notifications  (BSD-3-Clause)\nhttps://github.com/MaikuB/flutter_local_notifications\nflutter_math_fork 0.7.4 - inline TeX math in a bubble  (Apache-2.0)\nhttps://github.com/simplezhli/flutter_math_fork\nflutter_svg 2.3.0 - provider logos and vector icons  (MIT)\nhttps://github.com/flutter/packages/tree/main/third_party/packages/flutter_svg\ngeolocator 13.0.4 - location attachments  (MIT)\nhttps://github.com/baseflow/flutter-geolocator/tree/main/geolocator\nglob 2.2.0 - the workspace find tool  (BSD-3-Clause)\nhttps://github.com/dart-lang/tools/tree/main/pkgs/glob\nhighlight 0.7.0 - the grammar data behind the code preview  (MIT)\nhttps://github.com/pd4d10/highlight\nhttp 1.6.0 - OpenAI compatible endpoints  (BSD-3-Clause)\nhttps://github.com/dart-lang/http/tree/master/pkgs/http\nimage_picker 1.2.3 - camera and gallery photos  (Apache-2.0)\nhttps://github.com/flutter/packages/tree/main/packages/image_picker/image_picker\nintl 0.20.3 - date and number formatting  (BSD-3-Clause)\nhttps://github.com/dart-lang/i18n/tree/main/pkgs/intl\npath 1.9.1 - path arithmetic in the workspace sandbox  (BSD-3-Clause)\nhttps://github.com/dart-lang/core/tree/main/pkgs/path\npath_provider 2.1.6 - app directory for stickers and exports  (BSD-3-Clause)\nhttps://github.com/flutter/packages/tree/main/packages/path_provider/path_provider\npermission_handler 13.0.2 - one place to ask for photos, contacts, location and notifications  (MIT)\nhttps://github.com/baseflow/flutter-permission-handler\nphoto_manager 3.12.0 - album access for attachments  (Apache-2.0)\nhttps://github.com/fluttercandies/flutter_photo_manager\nratex_flutter 0.1.14 - the native LaTeX math card  (MIT)\nhttps://github.com/erweixin/RaTeX\nshared_preferences 2.5.5 - settings and chat storage  (BSD-3-Clause)\nhttps://github.com/flutter/packages/tree/main/packages/shared_preferences/shared_preferences\nsqflite 2.4.4 - message history and per chat paging  (BSD-2-Clause)\nhttps://github.com/tekartik/sqflite/tree/master/sqflite\ntimezone 0.10.1 - timezone data for scheduled messages  (BSD-2-Clause)\nhttps://github.com/srawlins/timezone\ntypst_flutter 3.0.0 - the embedded Typst compiler behind the CeTZ drawing card  (Apache-2.0)\nhttps://github.com/ajmalbuv/typst_flutter\nurl_launcher 6.3.2 - the community link in this dialog  (BSD-3-Clause)\nhttps://github.com/flutter/packages/tree/main/packages/url_launcher/url_launcher\nwebview_flutter 4.14.1 - rendering html in a file preview  (BSD-3-Clause)\nhttps://github.com/flutter/packages/tree/main/packages/webview_flutter/webview_flutter\nvideo_player 2.14.1 - video playback in chat bubbles  (BSD-3-Clause)\nhttps://github.com/flutter/packages/tree/main/packages/video_player/video_player\nworkmanager 0.10.10 - background delivery when the app is killed  (MIT)\nhttps://github.com/fluttercommunity/flutter_workmanager'**
-  String get settingsAboutDeps;
+  /// **'ToolCall reference'**
+  String get aboutThanksKelivo;
 
-  /// Community link in the about dialog, identical in every language
+  /// What the SillyTavern project was used for
   ///
   /// In en, this message translates to:
-  /// **'https://discord.gg/aQaNUHPsw'**
-  String get settingsAboutCommunityUrl;
+  /// **'Persona card reference'**
+  String get aboutThanksSillyTavern;
 
-  /// Label in front of the QQ group link in the about dialog
+  /// About page row that opens the licenses page
   ///
   /// In en, this message translates to:
-  /// **'QQ group 272298906:'**
-  String get settingsAboutQqGroup;
+  /// **'Open source licenses'**
+  String get aboutLicenses;
 
-  /// QQ group link in the about dialog, identical in every language
+  /// Note under the open source licenses row
   ///
   /// In en, this message translates to:
-  /// **'https://qm.qq.com/q/BeQPYWuzVS'**
-  String get settingsAboutQqGroupUrl;
+  /// **'These are the packages this app ships, each under its own licence. The full text sits in its repository.'**
+  String get aboutLicensesSub;
 
-  /// Small print at the bottom of settings
+  /// What this app uses archive for
   ///
   /// In en, this message translates to:
-  /// **'Developed by Celvra'**
-  String get settingsFooter;
+  /// **'Zipping a workspace for export'**
+  String get aboutDepArchive;
+
+  /// What this app uses characters for
+  ///
+  /// In en, this message translates to:
+  /// **'Grapheme clusters for text measurement'**
+  String get aboutDepCharacters;
+
+  /// What this app uses crypto for
+  ///
+  /// In en, this message translates to:
+  /// **'Hashing in the workspace; nothing is hashed on device yet'**
+  String get aboutDepCrypto;
+
+  /// What this app uses file_picker for
+  ///
+  /// In en, this message translates to:
+  /// **'Picking documents and audio files'**
+  String get aboutDepFilePicker;
+
+  /// What this app uses flutter_contacts for
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing a contact card'**
+  String get aboutDepFlutterContacts;
+
+  /// What this app uses flutter_highlight for
+  ///
+  /// In en, this message translates to:
+  /// **'Colouring the code preview'**
+  String get aboutDepFlutterHighlight;
+
+  /// What this app uses flutter_local_notifications for
+  ///
+  /// In en, this message translates to:
+  /// **'Local notifications'**
+  String get aboutDepFlutterLocalNotifications;
+
+  /// What this app uses flutter_math_fork for
+  ///
+  /// In en, this message translates to:
+  /// **'Rendering LaTeX inside a bubble'**
+  String get aboutDepFlutterMathFork;
+
+  /// What this app uses flutter_svg for
+  ///
+  /// In en, this message translates to:
+  /// **'Provider logos and vector icons'**
+  String get aboutDepFlutterSvg;
+
+  /// What this app uses geolocator for
+  ///
+  /// In en, this message translates to:
+  /// **'Location attachments'**
+  String get aboutDepGeolocator;
+
+  /// What this app uses glob for
+  ///
+  /// In en, this message translates to:
+  /// **'The workspace find tool'**
+  String get aboutDepGlob;
+
+  /// What this app uses highlight for
+  ///
+  /// In en, this message translates to:
+  /// **'The grammar data behind the code preview'**
+  String get aboutDepHighlight;
+
+  /// What this app uses http for
+  ///
+  /// In en, this message translates to:
+  /// **'OpenAI compatible endpoints'**
+  String get aboutDepHttp;
+
+  /// What this app uses image_picker for
+  ///
+  /// In en, this message translates to:
+  /// **'Camera and gallery photos'**
+  String get aboutDepImagePicker;
+
+  /// What this app uses intl for
+  ///
+  /// In en, this message translates to:
+  /// **'Date and number formatting'**
+  String get aboutDepIntl;
+
+  /// What this app uses path for
+  ///
+  /// In en, this message translates to:
+  /// **'Path arithmetic in the workspace sandbox'**
+  String get aboutDepPath;
+
+  /// What this app uses path_provider for
+  ///
+  /// In en, this message translates to:
+  /// **'App directory for stickers and exports'**
+  String get aboutDepPathProvider;
+
+  /// What this app uses permission_handler for
+  ///
+  /// In en, this message translates to:
+  /// **'Asking for photos, contacts, location and notifications in one place'**
+  String get aboutDepPermissionHandler;
+
+  /// What this app uses photo_manager for
+  ///
+  /// In en, this message translates to:
+  /// **'Album access for attachments'**
+  String get aboutDepPhotoManager;
+
+  /// What this app uses ratex_flutter for
+  ///
+  /// In en, this message translates to:
+  /// **'The native LaTeX math card'**
+  String get aboutDepRatex;
+
+  /// What this app uses shared_preferences for
+  ///
+  /// In en, this message translates to:
+  /// **'Settings and chat storage'**
+  String get aboutDepSharedPreferences;
+
+  /// What this app uses sqflite for
+  ///
+  /// In en, this message translates to:
+  /// **'Message history and per chat paging'**
+  String get aboutDepSqflite;
+
+  /// What this app uses terminal_view for
+  ///
+  /// In en, this message translates to:
+  /// **'The VT100 parser and renderer behind the workspace terminal, a vendored fork'**
+  String get aboutDepTerminalView;
+
+  /// What this app uses timezone for
+  ///
+  /// In en, this message translates to:
+  /// **'Timezone data for scheduled messages'**
+  String get aboutDepTimezone;
+
+  /// What this app uses typst_flutter for
+  ///
+  /// In en, this message translates to:
+  /// **'The embedded Typst compiler behind the CeTZ drawing card'**
+  String get aboutDepTypstFlutter;
+
+  /// What this app uses url_launcher for
+  ///
+  /// In en, this message translates to:
+  /// **'Opening the links on this page'**
+  String get aboutDepUrlLauncher;
+
+  /// What this app uses video_player for
+  ///
+  /// In en, this message translates to:
+  /// **'Video playback in chat bubbles'**
+  String get aboutDepVideoPlayer;
+
+  /// What this app uses webview_flutter for
+  ///
+  /// In en, this message translates to:
+  /// **'Rendering html in a file preview'**
+  String get aboutDepWebview;
+
+  /// What this app uses workmanager for
+  ///
+  /// In en, this message translates to:
+  /// **'Background delivery when the app is killed'**
+  String get aboutDepWorkmanager;
+
+  /// About page row that opens the contributors list
+  ///
+  /// In en, this message translates to:
+  /// **'Contributors'**
+  String get aboutContributors;
+
+  /// Subtitle of a contributor row with their commit count
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{1 contribution} other{{n} contributions}}'**
+  String aboutContributions(int n);
+
+  /// Row shown when the contributors list cannot be loaded
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load the list. Tap to retry.'**
+  String get aboutContributorsFailed;
+
+  /// Settings footer that opens the contributors list
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks to all contributors'**
+  String get settingsContributorsThanks;
 
   /// Incoming bubble text in the message preview on the appearance page
   ///
@@ -1591,7 +1783,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'{chats, plural, =1{1 conversation} other{{chats} conversations}} and {messages} messages'**
-  String dataBackupRestored(num chats, Object messages);
+  String dataBackupRestored(int chats, int messages);
 
   /// Bulletin after a restore that found nothing to do
   ///
@@ -1880,6 +2072,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Use the current main model for summaries'**
   String get aiFollowChainSub;
+
+  /// Model picker tab limiting the list to chat models
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get aiModelTabChat;
+
+  /// Model picker tab limiting the list to image models
+  ///
+  /// In en, this message translates to:
+  /// **'Image'**
+  String get aiModelTabImage;
+
+  /// Model picker tab showing every model
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get aiModelTabAll;
 
   /// Search field placeholder in the model picker
   ///
@@ -4842,7 +5052,7 @@ abstract class AppLocalizations {
   /// Body of the one-time whats-new dialog, one bullet per line
   ///
   /// In en, this message translates to:
-  /// **'What\'s new in this build:\n\n• Video messages: send videos from the gallery or as files, and the AI can actually watch them\n• Inline files: small files are injected into the context so the AI truly reads them\n• Stickers: the AI reads a sticker\'s meaning before sending it, with thumbnails\n• Clinginess: choose how often the AI speaks first, with an optional cap on proactive messages\n• Shop rework: gifts now land in the chat as a card the AI actually receives, and the shop sits one tap away\n• Auto backup: on by default, overwrite backups survive updates and reinstalls, restore offered on first launch\n• Model catalog: video capability flags corrected where the models.dev feed lags the provider (deepseek v4.1 flash)\n• Editor guard: every way out of the persona editor now asks before discarding edits\n• Upstream v1.0.2 merged: onboarding, SKILLS, LaTeX canvas cards, update checks\n• UI and performance polish'**
+  /// **'What\'s new in this build:\n\n• Voice and drawing: switched on per role. Speech runs on the device voice or an OpenAI compatible /audio/speech, drawing on /v1/images/generations\n• A real about page: the dialog became a screen, with the open source licences and the contributors\n• Models by purpose: the picker separates chat models from image models, so a chat no longer offers the image endpoints\n• Video messages: send videos from the gallery or as files, and the AI can actually watch them\n• Inline files: small files are injected into the context so the AI truly reads them\n• Stickers: the AI reads a sticker\'s meaning before sending it, with thumbnails\n• Clinginess: choose how often the AI speaks first, with an optional cap on proactive messages\n• Shop rework: gifts now land in the chat as a card the AI actually receives\n• Auto backup: on by default, overwrite backups survive updates and reinstalls, restore offered on first launch\n• Model catalog: video capability flags corrected where the models.dev feed lags the provider (deepseek v4.1 flash)\n• Editor guard: every way out of the persona editor now asks before discarding edits\n• Fixed on Android: the chat list came up empty because the database failed to open. The messages were there all along\n• Fixed: a deleted message came back after a restart\n• Fixed: the what\'s new sheet was black text in night mode\n• UI and performance polish'**
   String get whatsNewBody;
 
   /// Label of the camera tile at the top of the gallery grid
@@ -7214,6 +7424,390 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'What\'s new'**
   String get whatsNewEntry;
+
+  /// Section header of the per persona voice and drawing section
+  ///
+  /// In en, this message translates to:
+  /// **'Voice and drawing'**
+  String get voiceImageHeader;
+
+  /// Section footer of the per persona voice and drawing section
+  ///
+  /// In en, this message translates to:
+  /// **'Each role decides for itself. Turning a channel on gives the model a tool it can call: it draws when it wants to show something, and speaks when a line is worth hearing. The endpoint comes from the global default unless this role overrides it.'**
+  String get voiceImageFooter;
+
+  /// Row title enabling image generation for this role
+  ///
+  /// In en, this message translates to:
+  /// **'Drawing'**
+  String get voiceImageDraw;
+
+  /// Row subtitle explaining image generation
+  ///
+  /// In en, this message translates to:
+  /// **'Let this role generate pictures with an OpenAI compatible image endpoint'**
+  String get voiceImageDrawSub;
+
+  /// Row title of the image model override
+  ///
+  /// In en, this message translates to:
+  /// **'Image model'**
+  String get voiceImageDrawModel;
+
+  /// Row title of the image size override
+  ///
+  /// In en, this message translates to:
+  /// **'Image size'**
+  String get voiceImageDrawSize;
+
+  /// Row title enabling speech for this role
+  ///
+  /// In en, this message translates to:
+  /// **'Voice'**
+  String get voiceImageSpeak;
+
+  /// Row subtitle explaining speech
+  ///
+  /// In en, this message translates to:
+  /// **'Let this role read lines out loud'**
+  String get voiceImageSpeakSub;
+
+  /// Row title of the speech engine picker
+  ///
+  /// In en, this message translates to:
+  /// **'Engine'**
+  String get voiceImageEngine;
+
+  /// Speech engine option: the device voice
+  ///
+  /// In en, this message translates to:
+  /// **'Device voice'**
+  String get voiceImageEngineSystem;
+
+  /// Speech engine option subtitle for the device voice
+  ///
+  /// In en, this message translates to:
+  /// **'The phone\'s own text to speech. Works offline and costs nothing.'**
+  String get voiceImageEngineSystemSub;
+
+  /// Speech engine option: an OpenAI compatible endpoint
+  ///
+  /// In en, this message translates to:
+  /// **'Speech endpoint'**
+  String get voiceImageEngineApi;
+
+  /// Speech engine option subtitle for the endpoint
+  ///
+  /// In en, this message translates to:
+  /// **'Any OpenAI compatible audio/speech endpoint. Can carry a cloned voice.'**
+  String get voiceImageEngineApiSub;
+
+  /// Row title of the voice id override
+  ///
+  /// In en, this message translates to:
+  /// **'Voice id'**
+  String get voiceImageVoice;
+
+  /// Row subtitle for the voice id override
+  ///
+  /// In en, this message translates to:
+  /// **'Empty uses the global default'**
+  String get voiceImageVoiceSub;
+
+  /// Row title of the automatic read aloud switch
+  ///
+  /// In en, this message translates to:
+  /// **'Read replies aloud'**
+  String get voiceImageAutoSpeak;
+
+  /// Row subtitle of the automatic read aloud switch
+  ///
+  /// In en, this message translates to:
+  /// **'Speak every finished reply without being asked'**
+  String get voiceImageAutoSpeakSub;
+
+  /// Hint shown when no default endpoint exists yet
+  ///
+  /// In en, this message translates to:
+  /// **'Set a default image and speech endpoint in Settings > AI replies first.'**
+  String get voiceImageNotConfigured;
+
+  /// Settings row title for the default voice and drawing endpoints
+  ///
+  /// In en, this message translates to:
+  /// **'Voice and drawing'**
+  String get aiSettingsVoiceImage;
+
+  /// Settings row subtitle for the default voice and drawing endpoints
+  ///
+  /// In en, this message translates to:
+  /// **'Default endpoints for the roles that ask for them'**
+  String get aiSettingsVoiceImageSub;
+
+  /// Row title of the default image provider
+  ///
+  /// In en, this message translates to:
+  /// **'Image endpoint'**
+  String get aiSettingsImageProvider;
+
+  /// Row title of the default image model
+  ///
+  /// In en, this message translates to:
+  /// **'Image model'**
+  String get aiSettingsImageModel;
+
+  /// Row title of the default image size
+  ///
+  /// In en, this message translates to:
+  /// **'Image size'**
+  String get aiSettingsImageSize;
+
+  /// Row title of the default speech engine
+  ///
+  /// In en, this message translates to:
+  /// **'Speech engine'**
+  String get aiSettingsTtsEngine;
+
+  /// Row title of the default speech provider
+  ///
+  /// In en, this message translates to:
+  /// **'Speech endpoint'**
+  String get aiSettingsTtsProvider;
+
+  /// Row title of the default speech model
+  ///
+  /// In en, this message translates to:
+  /// **'Speech model'**
+  String get aiSettingsTtsModel;
+
+  /// Row title of the default voice
+  ///
+  /// In en, this message translates to:
+  /// **'Default voice'**
+  String get aiSettingsTtsVoice;
+
+  /// Row title of the default speech speed
+  ///
+  /// In en, this message translates to:
+  /// **'Speed'**
+  String get aiSettingsTtsSpeed;
+
+  /// Row subtitle of the default speech speed
+  ///
+  /// In en, this message translates to:
+  /// **'Playback rate for synthesized speech, 1.00x is the endpoint default'**
+  String get aiSettingsTtsSpeedSub;
+
+  /// Menu action that clears a choice
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get actionNone;
+
+  /// Value shown when a setting follows the global default
+  ///
+  /// In en, this message translates to:
+  /// **'Follow global'**
+  String get voiceImageFollowGlobal;
+
+  /// Settings row and page title for the voice module
+  ///
+  /// In en, this message translates to:
+  /// **'Voice'**
+  String get speechTitle;
+
+  /// Summary of the voice module when the device engine is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Device voice'**
+  String get speechSummarySystem;
+
+  /// Header of the voice engine section
+  ///
+  /// In en, this message translates to:
+  /// **'Engine'**
+  String get speechEngineHeader;
+
+  /// Footer of the voice engine section
+  ///
+  /// In en, this message translates to:
+  /// **'The device voice works offline and costs nothing; an endpoint can carry a cloned voice at the price of a request per line.'**
+  String get speechEngineFooter;
+
+  /// Voice engine option: the phone's own text to speech
+  ///
+  /// In en, this message translates to:
+  /// **'Device voice'**
+  String get speechEngineSystem;
+
+  /// Voice engine option: an OpenAI compatible audio/speech endpoint
+  ///
+  /// In en, this message translates to:
+  /// **'Speech endpoint'**
+  String get speechEngineApi;
+
+  /// Header of the voice endpoint section
+  ///
+  /// In en, this message translates to:
+  /// **'Endpoint'**
+  String get speechEndpointHeader;
+
+  /// Footer of the voice endpoint section
+  ///
+  /// In en, this message translates to:
+  /// **'This is the one server the voice module talks to. It is separate from the AI providers on purpose: a speech endpoint is not a chat model.'**
+  String get speechEndpointFooter;
+
+  /// Row title of the speech endpoint base url
+  ///
+  /// In en, this message translates to:
+  /// **'Base url'**
+  String get speechBaseUrl;
+
+  /// Hint for the speech base url field
+  ///
+  /// In en, this message translates to:
+  /// **'https://api.openai.com/v1'**
+  String get speechBaseUrlHint;
+
+  /// Row title of the speech endpoint API key
+  ///
+  /// In en, this message translates to:
+  /// **'API key'**
+  String get speechApiKey;
+
+  /// Hint for the speech API key field
+  ///
+  /// In en, this message translates to:
+  /// **'Paste the key'**
+  String get speechApiKeyHint;
+
+  /// Row title of the speech auth style
+  ///
+  /// In en, this message translates to:
+  /// **'Auth'**
+  String get speechAuthStyle;
+
+  /// Auth style option
+  ///
+  /// In en, this message translates to:
+  /// **'Bearer'**
+  String get speechAuthBearer;
+
+  /// Auth style option
+  ///
+  /// In en, this message translates to:
+  /// **'x-api-key'**
+  String get speechAuthXApiKey;
+
+  /// Auth style option
+  ///
+  /// In en, this message translates to:
+  /// **'Query key'**
+  String get speechAuthQuery;
+
+  /// Row title of the speech model
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get speechModel;
+
+  /// Header of the speech voice section
+  ///
+  /// In en, this message translates to:
+  /// **'Voice'**
+  String get speechVoiceHeader;
+
+  /// Footer of the speech voice section
+  ///
+  /// In en, this message translates to:
+  /// **'The voice id is free text: a gateway with cloned voices accepts ids no fixed list could carry.'**
+  String get speechVoiceFooter;
+
+  /// Row title of the speech voice id
+  ///
+  /// In en, this message translates to:
+  /// **'Voice id'**
+  String get speechVoice;
+
+  /// Subtitle of the speech voice picker
+  ///
+  /// In en, this message translates to:
+  /// **'Type a voice id the endpoint accepts. The configured voice is shown as the hint.'**
+  String get speechVoicePickSub;
+
+  /// Row title of the speech speed
+  ///
+  /// In en, this message translates to:
+  /// **'Speed'**
+  String get speechSpeed;
+
+  /// Row title of the speech instructions
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions'**
+  String get speechInstructions;
+
+  /// Hint for the speech instructions field
+  ///
+  /// In en, this message translates to:
+  /// **'Optional: how the voice should read. Only gpt-4o-mini-tts reads this.'**
+  String get speechInstructionsHint;
+
+  /// Notice shown when the speech endpoint is incomplete
+  ///
+  /// In en, this message translates to:
+  /// **'Fill in the base url to use the endpoint'**
+  String get speechNotReady;
+
+  /// Row title to clear the speech endpoint
+  ///
+  /// In en, this message translates to:
+  /// **'Clear endpoint'**
+  String get speechClear;
+
+  /// Confirm message for clearing the speech endpoint
+  ///
+  /// In en, this message translates to:
+  /// **'Remove the endpoint and the key? The device voice stays selected.'**
+  String get speechClearMessage;
+
+  /// Header of the device voice section
+  ///
+  /// In en, this message translates to:
+  /// **'Device voice'**
+  String get speechDeviceHeader;
+
+  /// Footer of the device voice section
+  ///
+  /// In en, this message translates to:
+  /// **'The phone\'s own text to speech is already configured: nothing to fill in.'**
+  String get speechDeviceFooter;
+
+  /// Row title to test the voice module
+  ///
+  /// In en, this message translates to:
+  /// **'Test voice'**
+  String get speechTest;
+
+  /// Subtitle of the voice test
+  ///
+  /// In en, this message translates to:
+  /// **'Speak a line through the selected engine'**
+  String get speechTestSub;
+
+  /// Default text for the voice test
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, this is a test of the voice.'**
+  String get speechTestLine;
+
+  /// Error prefix for a failed voice test
+  ///
+  /// In en, this message translates to:
+  /// **'Could not speak: '**
+  String get speechTestFailed;
 }
 
 class _AppLocalizationsDelegate
